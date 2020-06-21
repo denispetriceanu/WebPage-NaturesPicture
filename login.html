@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/login.css">
+    <title>Logare</title>
+    <script>
+        function sendData() {
+            var user = document.getElementById("username").value;
+            var pass = document.getElementById("password").value;
+
+            var data = "username=" + user + '&password=' + pass;
+            console.log(data);
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("toShowErrors").innerHTML = this.responseText;
+                    if (this.responseText == 'Success') window.location.replace("https://ie.usv.ro/~dragusanuv/Examen/");
+                }
+            };
+            xmlhttp.open("POST", "php/login.php", true);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send(data);
+        }
+    </script>
+</head>
+
+<body>
+    <div class="body"></div>
+    <div class="grad"></div>
+    <div class="header">
+        <div>Nature's<span>Picture's</span></div>
+    </div>
+    <br>
+    <div class="login">
+        <input type="text" placeholder="nume" name="username" id="username"><br>
+        <input type="password" placeholder="parola" name="password" id="password"><br>
+        <input type="button" value="Logează-te" onclick="sendData()"
+            style="background-color: rgb(112, 230, 101); color: black;">
+        <a href="https://ie.usv.ro/~dragusanuv/Examen/"><input type="button" onclick="acasa()" value="Acasă"
+                style="background-color: rgb(224, 144, 144); color: black;"></a>
+        <a href="https://ie.usv.ro/~dragusanuv/Examen/register.html"><input type="button" onclick="acasa()"
+                value="Cont nou" style="background-color:  rgb(85, 71, 211); color: rgb(4, 4, 7);">
+        </a>
+
+        <div id="toShowErrors" style="color: red; font-size: 20px; margin-top: 20px;"></div>
+    </div>
+</body>
+
+</html>
